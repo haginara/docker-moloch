@@ -1,0 +1,36 @@
+version: '2.1'
+
+services:
+  moloch:
+    build: ./moloch
+    container_name: moloch
+    volumes:
+      - /pcap:/data/pcap:rw
+    ports:
+      - 8005:8005
+    links:
+      - elasticsearch
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.0
+    container_name: elasticsearch
+    environment:
+        #- cluster.name=docker-cluster
+        - bootstrap.memory_lock=true
+        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data:rw
+    ports:
+      - 9200:9200
+
+volumes:
+  esdata1:
+    driver: local
