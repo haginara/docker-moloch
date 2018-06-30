@@ -5,7 +5,7 @@ services:
     build: ./moloch
     container_name: moloch
     volumes:
-      - /pcap:/data/pcap:rw
+      - ./pcap:/data/pcap:rw
     ports:
       - 8005:8005
     links:

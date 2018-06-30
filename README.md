@@ -13,7 +13,8 @@ If you already have a docker environment, you don't need to use Vagrant. vagrant
 Installation
 ============
 
+```
 git clone vagrant-docker-moloch
 cd vagrant-docker-moloch
 vagrant up
-
+```
