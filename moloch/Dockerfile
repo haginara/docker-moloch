@@ -7,7 +7,8 @@ ARG PASSWORD="admin"
 ENV USERNAME ${USERNAME}
 ENV PASSWORD ${PASSWORD}
 
-ENV MOLOCH_VERSION 1.1.1-1
+ENV UBUNTU_VERSION 16.04
+ENV MOLOCH_VERSION 2.4.0-1
 
 # MOLOCH IDS
 # install prerequisites for moloch
@@ -18,7 +19,8 @@ RUN apt-get -y -qq install net-tools curl wget gdebi-core nodejs phantomjs
 
 WORKDIR /tmp
 # Get moloch
-RUN curl -sL https://files.molo.ch/builds/ubuntu-16.04/moloch_${MOLOCH_VERSION}_amd64.deb -o moloch_${MOLOCH_VERSION}_amd64.deb
+RUN curl -sL https://files.molo.ch/builds/ubuntu-${UBUNTU_VERSION}/moloch_${MOLOCH_VERSION}_amd64.deb -o moloch_${MOLOCH_VERSION}_amd64.deb
+#RUN curl -sL https://s3.amazonaws.com/files.molo.ch/builds/ubuntu-${UBUNTU_VERSION}/moloch_${MOLOCH_VERSION}_amd64.deb -o moloch_${MOLOCH_VERSION}_amd64.deb
 #install moloch debian package
 RUN gdebi -n moloch_${MOLOCH_VERSION}_amd64.deb
 RUN apt-get -qq upgrade && apt-get clean \
